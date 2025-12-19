@@ -12,10 +12,10 @@ public class TaskController {
     public TaskController(TaskService service){
         this.service=service;
     }
-    @GetMapping
-    public List<Task> getAll(){
-        return service.getAllTasks();
-    }
+//    @GetMapping
+//    public List<Task> getAll(){
+//        return service.getAllTasks();
+//    }
     @PostMapping
     public Task createTask(@RequestBody Task task){
         return service.createTask(task);
@@ -30,6 +30,14 @@ public class TaskController {
             @RequestParam(required = false) String title,
             @RequestParam(required = false) String status){
         service.updatetask(id,title,status);
+    }
+    @GetMapping
+    public List<Task> getTaskByStatus(
+            @RequestParam(required = false) Task.Status status){
+        if(status!=null){
+            return service.getTaskByStatus(status);
+        }
+        return service.getAllTasks();
     }
 
 

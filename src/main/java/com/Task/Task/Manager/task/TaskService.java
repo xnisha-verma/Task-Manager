@@ -10,7 +10,6 @@ public class TaskService {
     public TaskService(TaskRepository repository){
         this.repository = repository;
     }
-
     public List<Task> getAllTasks(){
         return repository.findAll();
     }
@@ -33,5 +32,8 @@ public class TaskService {
         if(status!=null){
             task.setStatus(Task.Status.valueOf(status));
         }
+    }
+    public List<Task> getTaskByStatus(Task.Status status){
+        return repository.findByStatus(status);
     }
 }
